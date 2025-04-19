@@ -10,12 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
     <meta name="author" content="Hỏi Dân IT" />
-    <title>Dashboard - Hỏi Dân IT</title>
+    <title>Create Category - Hỏi Dân IT</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
 </head>
 
 <body class="sb-nav-fixed">
@@ -25,50 +24,52 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Manage user</h1>
+                <h1 class="mt-4">Manage Category</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active">User</li>
+                    <li class="breadcrumb-item active">Create Category</li>
                 </ol>
                 <div class="mt-5">
                     <div class="row">
                         <div class="col-md-6 col-12 mx-auto">
-                            <h3>Create category</h3>
+                            <h3>Create Category</h3>
                             <hr />
+
                             <%--@elvariable id="newCategory" type="com.example.bookshop.domain.Category"--%>
                             <form:form method="post" action="/admin/book/createCategory"
-                                       modelAttribute="newCategory" class="row" enctype="multipart/form-data">
-                                <div class="mb-3 col-12 col-md-6">
-                                    <c:set var="nameError">
-                                        <form:errors path="name" />
-                                    </c:set>
+                                       modelAttribute="newCategory" class="row g-3">
+
+                                <!-- Name -->
+                                <div class="col-12">
                                     <label class="form-label">Name:</label>
-                                    <form:input type="text" class="form-control ${not empty nameError ? 'is-invalid':''}"
-                                                path="name" />
-                                    <form:errors path="name" cssClass="invalid-feedback"/>
+                                    <form:input path="name"
+                                                cssClass="form-control ${not empty errors['name'] ? 'is-invalid' : ''}" />
+                                    <form:errors path="name" cssClass="invalid-feedback" />
                                 </div>
 
-                                <div class="mb-3 col-12">
-                                    <c:set var="detailDescError">
-                                        <form:errors path="description" cssClass="invalid-feedback"/>
-                                    </c:set>
-                                    <label class="form-label" cssClass="invalid-feedBack">Detail description:</label>
-                                    <form:input type="text" class="form-control ${not empty detailDescError ? 'is-invalid':''}" path="description" />
-                                        ${detailDescError}
+                                <!-- Description -->
+                                <div class="col-12">
+                                    <label class="form-label">Detail Description:</label>
+                                    <form:textarea path="description" rows="3"
+                                                   cssClass="form-control ${not empty errors['description'] ? 'is-invalid' : ''}" />
+                                    <form:errors path="description" cssClass="invalid-feedback" />
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <!-- Submit -->
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                    <a href="/admin/category" class="btn btn-secondary">Cancel</a>
+                                </div>
                             </form:form>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </main>
         <jsp:include page="../layout/footer.jsp" />
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
 <script src="/js/scripts.js"></script>
