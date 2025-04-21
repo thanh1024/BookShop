@@ -44,4 +44,8 @@ public class UserService {
         return this.roleRepository.findByName(name);
     }
 
+    public boolean checkEmailExist(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
 }

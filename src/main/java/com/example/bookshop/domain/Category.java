@@ -19,6 +19,7 @@ public class Category {
 
     @NotNull(message = "Name not valid")
     private String name;
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
 
     @ManyToOne

@@ -27,6 +27,7 @@ public class Book implements Serializable {
     private Double price; // ✅ dùng Double thay vì double
 
     @NotBlank(message = "Mô tả chi tiết không được để trống")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
 
     @NotBlank(message = "Mô tả ngắn không được để trống")

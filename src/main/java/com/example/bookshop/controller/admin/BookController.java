@@ -2,8 +2,10 @@ package com.example.bookshop.controller.admin;
 
 import com.example.bookshop.domain.Book;
 import com.example.bookshop.domain.Category;
+import com.example.bookshop.domain.Review;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.service.CategoryService;
+import com.example.bookshop.service.ReviewService;
 import com.example.bookshop.service.UploadService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class BookController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping("admin/book")
     public String getBookPage(Model model) {
@@ -138,6 +143,7 @@ public class BookController {
         bookService.deleteBook(book.getId());
         return "redirect:/admin/book";
     }
+
 
 
 }
