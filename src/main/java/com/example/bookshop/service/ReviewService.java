@@ -15,7 +15,6 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    // Lấy danh sách đánh giá của một sách
     public List<Review> findByBookId(long bookId) {
         return reviewRepository.findByBookId(bookId);
     }

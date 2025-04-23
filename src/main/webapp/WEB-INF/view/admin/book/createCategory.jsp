@@ -58,7 +58,7 @@
                                 <!-- Submit -->
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary">Create</button>
-                                    <a href="/admin/category" class="btn btn-secondary">Cancel</a>
+                                    <a href="/admin/book/category" class="btn btn-secondary">Cancel</a>
                                 </div>
                             </form:form>
                         </div>

@@ -26,16 +26,15 @@ public class ItemController {
 
     @GetMapping("book/{bookId}")
     public String showBookDetail(@PathVariable("bookId") long bookId, Model model) {
-        // Lấy thông tin sách và danh sách đánh giá từ database
         Book book = bookService.getBookById(bookId);
         if (book == null) {
-            return "redirect:/"; // Quay lại trang chủ nếu không tìm thấy sách
+            return "redirect:/";
         }
 
         List<Review> reviews = reviewService.findByBookId(bookId);
         model.addAttribute("book", book);
         model.addAttribute("reviews", reviews);
 
-        return "client/book/detail"; // Trả về JSP để hiển thị thông tin chi tiết sách
+        return "client/book/detail";
     }
 }

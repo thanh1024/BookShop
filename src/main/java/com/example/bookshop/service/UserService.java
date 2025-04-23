@@ -1,5 +1,6 @@
 package com.example.bookshop.service;
 
+import com.example.bookshop.domain.DTO.RegisterDTO;
 import com.example.bookshop.domain.Role;
 import com.example.bookshop.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,18 @@ public class UserService {
 
     public boolean checkEmailExist(String email) {
         return this.userRepository.existsByEmail(email);
+    }
+
+    public User registerDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullName(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
+    }
+
+    public User getUSerByEmail(String email) {
+        return this.userRepository.findByEmail(email);
     }
 
 }
