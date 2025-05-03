@@ -3,6 +3,8 @@ package com.example.bookshop.service;
 import com.example.bookshop.domain.DTO.RegisterDTO;
 import com.example.bookshop.domain.Role;
 import com.example.bookshop.domain.User;
+import com.example.bookshop.repository.BookRepository;
+import com.example.bookshop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.bookshop.repository.RoleRepository;
@@ -17,6 +19,12 @@ public class UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
 
     public List<User> getAllUsers() {
@@ -61,4 +69,13 @@ public class UserService {
         return this.userRepository.findByEmail(email);
     }
 
+    public long countBooks(){
+        return this.bookRepository.count();
+    }
+    public long countUsers(){
+        return this.userRepository.count();
+    }
+    public long countOrders(){
+        return this.orderRepository.count();
+    }
 }

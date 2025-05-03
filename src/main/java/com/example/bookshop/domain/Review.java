@@ -3,13 +3,15 @@ package com.example.bookshop.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "review")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
-public class Review {
+public class Review implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

@@ -1,9 +1,13 @@
 package com.example.bookshop.controller.client;
 
 import com.example.bookshop.domain.DTO.RegisterDTO;
+import com.example.bookshop.domain.Order;
 import com.example.bookshop.domain.User;
 import com.example.bookshop.service.BookService;
+import com.example.bookshop.service.OrderService;
 import com.example.bookshop.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class HomePageController {
     @Autowired
@@ -21,6 +27,9 @@ public class HomePageController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -57,6 +66,26 @@ public class HomePageController {
     public String getLoginPage(Model model) {
 
         return "client/auth/login";
+    }
+
+    @GetMapping("/access-deny")
+    public String getDenyPage(Model model) {
+
+        return "client/auth/deny";
+    }
+
+    @GetMapping("/order-history")
+    public String getOrderHistoryPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        User user = new User();
+
+        long id =(long) session.getAttribute("id");
+        user.setId(id);
+        //Cart cart = this.productService.getCartByUser(user);
+        List<Order> orders = this.orderService.findOrdersByUser(user);
+
+        model.addAttribute("orders", orders);
+        return "client/cart/order-history";
     }
 
 

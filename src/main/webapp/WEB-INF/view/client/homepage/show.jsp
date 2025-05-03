@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,6 +40,7 @@
 
 
 </head>
+
 <body>
 
 <jsp:include page="../layout/header.jsp" />
@@ -63,11 +66,14 @@
                         <p class="fw-bold mt-auto">
                             <fmt:formatNumber value="${book.price}" type="number" /> VND
                         </p>
-                        <button
-                                class="btn btn-outline-primary w-100 mt-2 btnAddToCart"
-                                data-book-id="${book.id}">
-                            <i class="fa fa-shopping-cart me-1"></i> Thêm vào giỏ hàng
-                        </button>
+                        <form action="/add-product-to-cart/${book.id}" method="post">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                            <button data-product-id="${book.id}"
+                                    class="btnAddToCartHomepage mx-auto border border-secondary rounded-pill px-3 text-primary"><i
+                                    class="fa fa-shopping-bag me-2 text-primary"></i>
+                                Add to cart
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -75,18 +81,26 @@
     </div>
 </div>
 
+<jsp:include page="../layout/feature.jsp" />
+
 <jsp:include page="../layout/footer.jsp" />
 
-<!-- JS nếu muốn xử lý thêm vào giỏ hàng -->
-<script>
-    $(document).ready(function () {
-        $(".btnAddToCart").click(function () {
-            const bookId = $(this).data("book-id");
-            // Gọi AJAX hoặc submit form để thêm sách vào giỏ hàng
-            console.log("Thêm vào giỏ:", bookId);
-        });
-    });
-</script>
 
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
+        class="fa fa-arrow-up"></i></a>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/client/lib/easing/easing.min.js"></script>
+<script src="/client/lib/waypoints/waypoints.min.js"></script>
+<script src="/client/lib/lightbox/js/lightbox.min.js"></script>
+<script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="/client/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 </body>
+
 </html>

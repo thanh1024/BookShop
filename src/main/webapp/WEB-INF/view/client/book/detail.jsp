@@ -71,12 +71,35 @@
             </div>
 
             <p class="mt-4">${book.detailDesc}</p>
-
-            <div class="mt-4">
-                <button class="btn btn-outline-success px-4">
-                    <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
-                </button>
+            <div class="input-group quantity mb-5" style="width: 100px;">
+                <div class="input-group-btn">
+                    <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text"
+                       class="form-control form-control-sm text-center border-0" value="1"
+                       data-cart-detail-index="0">
+                <div class="input-group-btn">
+                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
             </div>
+            <form action="/add-product-from-view-detail" method="post" modelAttribute="product">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <input class="form-control d-none" type="text" value="${book.id}"
+                   name="id" />
+
+            <input class="form-control d-none" type="text" name="quantity"
+                   id="cartDetails0.quantity" value="1" />
+            <button data-product-id="${book.id}"
+                    class="btnAddToCartDetail btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
+                    class="fa fa-shopping-bag me-2 text-primary"></i>
+                Add to cart
+            </button>
+
+            </form>
         </div>
     </div>
 
@@ -139,6 +162,29 @@
         </div>
 
     </div>
-    <jsp:include page="../layout/footer.jsp" />
+<!-- Footer Start -->
+<jsp:include page="../layout/footer.jsp" />
+<!-- Footer End -->
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
+        class="fa fa-arrow-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/client/lib/easing/easing.min.js"></script>
+<script src="/client/lib/waypoints/waypoints.min.js"></script>
+<script src="/client/lib/lightbox/js/lightbox.min.js"></script>
+<script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="/client/js/main.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+
 </body>
+
 </html>

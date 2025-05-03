@@ -4,7 +4,7 @@
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
             <a href="/" class="navbar-brand">
-                <h1 class="text-primary display-6">LaptopShop</h1>
+                <h1 class="text-primary display-6">BookShop</h1>
             </a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -29,9 +29,8 @@
                             </span>
                         </a>
                         <div class="dropdown my-auto">
-                            <a href="#" class="dropdown" role="button" id="dropdownMenuLink"
-                               data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                            <a href="#" class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink"
+                               data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user fa-2x"></i>
                             </a>
 

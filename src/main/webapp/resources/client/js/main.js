@@ -26,17 +26,17 @@
             } else {
                 $('.fixed-top').removeClass('shadow').css('top', 0);
             }
-        } 
+        }
     });
-    
-    
-   // Back to top button
-   $(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-        $('.back-to-top').fadeIn('slow');
-    } else {
-        $('.back-to-top').fadeOut('slow');
-    }
+
+
+    // Back to top button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
     });
     $('.back-to-top').click(function () {
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
@@ -166,11 +166,11 @@
         const input = button.parent().parent().find('input');
         input.val(newVal);
 
-         //set form index
-         const index = input.attr("data-cart-detail-index")
-         const el = document.getElementById(`cartDetails${index}.quantity`);
-         $(el).val(newVal);
- 
+        //set form index
+        const index = input.attr("data-cart-detail-index")
+        const el = document.getElementById(`cartDetails${index}.quantity`);
+        $(el).val(newVal);
+
 
         //get price
         const price = input.attr("data-cart-detail-price");
@@ -318,7 +318,7 @@
         const sort = params.get('sort');
         $(`input[type="radio"][name="radio-sort"][value="${sort}"]`).prop('checked', true);
     }
-     //////////////////////////
+    //////////////////////////
     //handle add to cart with ajax
     $('.btnAddToCartHomepage').click(function (event) {
         event.preventDefault();
