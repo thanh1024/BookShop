@@ -23,9 +23,26 @@ public class Category implements Serializable {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
 
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
+
 
     public String getName() {
         return name;

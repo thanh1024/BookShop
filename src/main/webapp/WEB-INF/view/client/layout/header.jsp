@@ -13,12 +13,18 @@
             <div class="collapse navbar-collapse bg-white justify-content-between mx-5" id="navbarCollapse">
                 <div class="navbar-nav">
                     <a href="/" class="nav-item nav-link active">Trang chủ</a>
-                    <a href="/products" class="nav-item nav-link">Sản phẩm</a>
+                    <a href="/books" class="nav-item nav-link">Sản phẩm</a>
 
                 </div>
                 <div class="d-flex m-3 me-0">
-                    <c:if test="${not empty pageContext.request.userPrincipal}">
+                    <div>
+                        <input type="hidden" name="${_csrf.parameterName}"
+                               value="${_csrf.token}"/>
+                    </div>
+                    <input type="text" id="searchBox" placeholder="Tìm tên sách..." class="position-relative me-4 my-auto" />
+                    <div id="searchResults" class="position-relative me-4 my-auto"></div>
 
+                    <c:if test="${not empty pageContext.request.userPrincipal}">
 
                         <a href="/cart" class="position-relative me-4 my-auto">
                             <i class="fa fa-shopping-bag fa-2x"></i>
@@ -69,3 +75,5 @@
         </nav>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

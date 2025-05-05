@@ -64,12 +64,12 @@ public class UserController {
             // page = 1
         }
         Pageable pageable = PageRequest.of(page - 1, 2);
-//        Page<User> users = this.userService.getAllProducts(pageable);
-//        List<User> listUsers = users.getContent();
-//
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", users.getTotalPages());
-//        model.addAttribute("users", listUsers);
+        Page<User> users = this.userService.getAllProducts(pageable);
+        List<User> listUsers = users.getContent();
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", users.getTotalPages());
+        model.addAttribute("users", listUsers);
 
         return "admin/user/show";
     }

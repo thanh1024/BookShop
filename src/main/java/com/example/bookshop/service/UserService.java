@@ -6,6 +6,8 @@ import com.example.bookshop.domain.User;
 import com.example.bookshop.repository.BookRepository;
 import com.example.bookshop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.example.bookshop.repository.RoleRepository;
 import com.example.bookshop.repository.UserRepository;
@@ -77,5 +79,9 @@ public class UserService {
     }
     public long countOrders(){
         return this.orderRepository.count();
+    }
+
+    public Page<User> getAllProducts(Pageable page) {
+        return this.userRepository.findAll(page);
     }
 }

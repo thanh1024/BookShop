@@ -367,6 +367,8 @@
         });
     });
 
+
+
     $('.btnAddToCartDetail').click(function (event) {
         event.preventDefault();
         if (!isLogin()) {
@@ -421,6 +423,8 @@
         }
         return true;
     }
+
+
 
 
 })(jQuery);

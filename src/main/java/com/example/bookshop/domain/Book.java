@@ -5,7 +5,9 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -55,6 +57,17 @@ public class Book implements Serializable {
     )
     @NotNull
     private Set<Category> categories = new HashSet<>();
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    List<Review> reviews = new ArrayList<>();
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public long getId() {
         return id;
@@ -143,5 +156,6 @@ public class Book implements Serializable {
     public void setPrice(@NotNull(message = "Giá không được để trống") @DecimalMin(value = "0", message = "Giá phải lớn hơn 0") Double price) {
         this.price = price;
     }
+
 }
 

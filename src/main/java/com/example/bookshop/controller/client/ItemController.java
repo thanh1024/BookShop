@@ -127,7 +127,6 @@ public class ItemController {
             @RequestParam("receiverPhone") String receiverPhone) {
         HttpSession session = request.getSession(false);
         User currentUser = (User) session.getAttribute("user");
-
         this.bookService.handlePlaceOrder(currentUser, session, receiverName, receiverAddress, receiverPhone);
         return "redirect:/thanks";
     }

@@ -48,7 +48,21 @@
 <jsp:include page="../layout/banner.jsp" />
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Sách nổi bật</h2>
+    <div class="row g-4">
+        <div class="col-lg-4 text-start">
+            <h1>SÁCH NỔI BẬT</h1>
+        </div>
+        <div class="col-lg-8 text-end">
+            <ul class="nav nav-pills d-inline-flex text-center mb-5">
+                <li class="nav-item">
+                    <a class="d-flex m-2 py-2 bg-light rounded-pill active"
+                       href="/books">
+                        <span class="text-dark" style="width: 130px;">TẤT CẢ SÁCH</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="row">
         <c:forEach var="book" items="${books}">
             <div class="col-md-3 mb-4">

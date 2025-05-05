@@ -1,13 +1,17 @@
 package com.example.bookshop.service;
 
 import com.example.bookshop.domain.*;
+import com.example.bookshop.domain.DTO.BookDTO;
 import com.example.bookshop.repository.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -171,6 +175,7 @@ public class BookService {
             }
             // Step 2 delete cartDetail and cart
             for (CartDetail cd : cartDetails) {
+                cd.getBook().setQuantity(cd.getBook().getQuantity()-cd.getQuantity());
                 this.cartDetailRepository.deleteById(cd.getId());
             }
 //            this.cartRepository.deleteById(cart.getId());
@@ -181,4 +186,7 @@ public class BookService {
         }
     }
 
+    public Page<Book> getAllProducts(Pageable page) {
+        return this.bookRepository.findAll(page);
+    }
 }

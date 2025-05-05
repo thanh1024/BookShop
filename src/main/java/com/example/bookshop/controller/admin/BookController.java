@@ -9,7 +9,11 @@ import com.example.bookshop.service.ReviewService;
 import com.example.bookshop.service.UploadService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -18,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -35,8 +40,24 @@ public class BookController {
     private ReviewService reviewService;
 
     @GetMapping("admin/book")
-    public String getBookPage(Model model) {
-        model.addAttribute("books", bookService.getAllBooks());
+    public String getBookPage(Model model, @RequestParam("page") Optional<String> optionalPage) {
+        int page = 1;
+        try {
+            if (optionalPage.isPresent()) {
+                page = Integer.parseInt(optionalPage.get());
+            } else {
+                // page = 1
+            }
+        } catch (Exception e) {
+            // page = 1
+        }
+        Pageable pageable = PageRequest.of(page - 1, 2);
+        Page<Book> arrBook = this.bookService.getAllProducts(pageable);
+        List<Book> listBooks = arrBook.getContent();
+
+        model.addAttribute("books", listBooks);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", arrBook.getTotalPages());
         return "admin/book/show";
     }
 
@@ -138,9 +159,21 @@ public class BookController {
         return "admin/book/delete";
     }
 
+    @Transactional
     @PostMapping("admin/book/delete")
     public String deleteBook(@ModelAttribute("bookDelete") Book book) {
-        bookService.deleteBook(book.getId());
+        // Xóa liên kết 2 chiều (nếu bạn có quan hệ 2 chiều trong Category)
+        Book book1 = bookService.getBookById(book.getId());
+        for (Category category : book1.getCategories()) {
+            category.getBooks().remove(book1); // nếu có mappedBy trong Category
+        }
+
+// Xóa tất cả liên kết với Category
+        book1.getCategories().clear();
+
+// Lưu lại để cập nhật bảng book_category
+        bookService.saveBook(book1);
+        bookService.deleteBook(book1.getId());
         return "redirect:/admin/book";
     }
 

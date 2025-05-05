@@ -1,5 +1,6 @@
 package com.example.bookshop.controller.client;
 
+import com.example.bookshop.domain.Book;
 import com.example.bookshop.domain.DTO.RegisterDTO;
 import com.example.bookshop.domain.Order;
 import com.example.bookshop.domain.User;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomePageController {
@@ -35,9 +37,12 @@ public class HomePageController {
     private PasswordEncoder passwordEncoder;
     @GetMapping("/")
     public String homePage(Model model) {
-        model.addAttribute("books", bookService.getAllBooks());
+        List<Book> allBooks = bookService.getAllBooks();
+        List<Book> top10Books = allBooks.stream().limit(10).collect(Collectors.toList());
+        model.addAttribute("books", top10Books);
         return "client/homepage/show";
     }
+
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
