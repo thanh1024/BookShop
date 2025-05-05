@@ -13,7 +13,7 @@
             <div class="collapse navbar-collapse bg-white justify-content-between mx-5" id="navbarCollapse">
                 <div class="navbar-nav">
                     <a href="/" class="nav-item nav-link active">Trang chủ</a>
-                    <a href="/books" class="nav-item nav-link">Lọc Sách</a>
+                    <a href="/books" class="nav-item nav-link">Lọc Truyện</a>
 
                 </div>
                 <div class="d-flex m-3 me-0">
@@ -22,7 +22,7 @@
                                value="${_csrf.token}"/>
                     </div>
                     <div class="position-relative me-4 my-auto">
-                        <input type="text" id="searchBox" placeholder="Tìm tên sách..." class="form-control"/>
+                        <input type="text" id="searchBox" placeholder="Tìm tên truyện..." class="form-control"/>
                         <div id="searchResults" class="position-absolute w-100" style="display: none;"></div>
                     </div>
 
@@ -50,8 +50,6 @@
                                         <c:out value="${sessionScope.fullName}" />
                                     </div>
                                 </li>
-
-                                <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>
 
                                 <li><a class="dropdown-item" href="/order-history">Lịch sử mua hàng</a></li>
                                 <li>
@@ -237,6 +235,7 @@
                 url: '/api/books/search',
                 method: 'GET',
                 data: { name: query },
+                dataType: "json",
                 headers: {
                     '${_csrf.headerName}': token
                 },
@@ -260,12 +259,12 @@
                 books.forEach(book => {
                     resultsHtml += `
                     <div class="search-result-item">
-                        <a href="/books/${book.id}" class="book-result">
+                        <a href="/book/\${book.id}" class="book-result">
                             <div class="book-image">
-                                <img src="/images/books/${book.image || 'default.jpg'}" alt="${book.name}">
+                                <img src="/images/books/\${book.image}" alt="\${book.name}">
                             </div>
                             <div class="book-info">
-                                <div class="book-title">${book.name}</div>
+                                <div class="book-title">\${book.name}</div>
                             </div>
                         </a>
                     </div>

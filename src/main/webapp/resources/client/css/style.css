@@ -508,5 +508,11 @@
 .footer .footer-item p.mb-4 {
     line-height: 35px;
 }
+.book-img-fixed {
+    width: 100%;           /* hoặc 200px nếu muốn cố định chiều ngang */
+    height: 250px;         /* chiều cao cố định */
+    object-fit: cover;     /* cắt ảnh cho đều, không méo */
+    object-position: center; /* canh giữa ảnh */
+}
 
 /*** Footer End ***/

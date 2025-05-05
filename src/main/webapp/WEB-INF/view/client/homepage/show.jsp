@@ -58,7 +58,7 @@
                 <li class="nav-item">
                     <a class="d-flex m-2 py-2 bg-light rounded-pill active"
                        href="/books">
-                        <span class="text-dark" style="width: 130px;">TẤT CẢ SÁCH</span>
+                        <span class="text-dark" style="width: 130px;">TẤT CẢ TRUYỆN</span>
                     </a>
                 </li>
             </ul>
@@ -69,7 +69,7 @@
             <div class="col-md-3 mb-4">
                 <div class="card h-100">
                     <a href="/book/${book.id}">
-                        <img src="/images/books/${book.image}" class="card-img-top" alt="${book.name}">
+                        <img src="/images/books/${book.image}" class="card-img-top book-img-fixed" alt="${book.name}">
                     </a>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">

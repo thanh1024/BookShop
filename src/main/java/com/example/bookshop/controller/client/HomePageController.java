@@ -38,7 +38,7 @@ public class HomePageController {
     @GetMapping("/")
     public String homePage(Model model) {
         List<Book> allBooks = bookService.getAllBooks();
-        List<Book> top10Books = allBooks.stream().limit(10).collect(Collectors.toList());
+        List<Book> top10Books = allBooks.stream().limit(8).collect(Collectors.toList());
         model.addAttribute("books", top10Books);
         return "client/homepage/show";
     }

@@ -166,7 +166,7 @@ public class ItemController {
         }
 
         // Create pageable with 2 items per page
-        Pageable pageable = PageRequest.of(page - 1, 2);
+        Pageable pageable = PageRequest.of(page - 1, 6);
 
         // Build specification based on filters
         Specification<Book> spec = Specification.where(null);
