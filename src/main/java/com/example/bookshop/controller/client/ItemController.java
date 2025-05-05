@@ -1,18 +1,25 @@
 package com.example.bookshop.controller.client;
 
 import com.example.bookshop.domain.*;
+import com.example.bookshop.repository.BookRepository;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.service.CategoryService;
 import com.example.bookshop.service.ReviewService;
+import com.example.bookshop.service.specification.BookSpec;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ItemController {
@@ -24,6 +31,9 @@ public class ItemController {
 
     @Autowired
     private ReviewService reviewService;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     @GetMapping("book/{bookId}")
     public String showBookDetail(@PathVariable("bookId") long bookId, Model model) {
@@ -134,6 +144,57 @@ public class ItemController {
     @GetMapping("/thanks")
     public String getThanksPage(Model model) {
         return "client/cart/thanks";
+    }
+
+    @GetMapping("/books")
+    public String getBooksPage(
+            Model model,
+            @RequestParam(value = "category", required = false) List<Long> categoryIds,
+            @RequestParam("page") Optional<String> optionalPage,
+            HttpServletRequest request
+    ) {
+        List<Category> categories = this.categoryService.findAll();
+
+        // Parse page parameter
+        int page = 1;
+        try {
+            if (optionalPage.isPresent()) {
+                page = Integer.parseInt(optionalPage.get());
+            }
+        } catch (Exception e) {
+            // Default to page 1 on error
+        }
+
+        // Create pageable with 2 items per page
+        Pageable pageable = PageRequest.of(page - 1, 2);
+
+        // Build specification based on filters
+        Specification<Book> spec = Specification.where(null);
+        if (categoryIds != null && !categoryIds.isEmpty()) {
+            spec = spec.and(BookSpec.hasCategories(categoryIds));
+        }
+
+        // Fetch books with specification
+        Page<Book> book = bookRepository.findAll(spec, pageable);
+        List<Book> books = book.getContent();
+
+        // Build query string for pagination links
+        StringBuilder queryBuilder = new StringBuilder();
+        if (categoryIds != null && !categoryIds.isEmpty()) {
+            for (Long categoryId : categoryIds) {
+                queryBuilder.append("&category=").append(categoryId);
+            }
+        }
+        String queryString = queryBuilder.toString();
+
+        // Add attributes to the model
+        model.addAttribute("categories", categories);
+        model.addAttribute("books", books);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", book.getTotalPages());
+        model.addAttribute("queryString", queryString);
+
+        return "client/book/show";
     }
 
 }

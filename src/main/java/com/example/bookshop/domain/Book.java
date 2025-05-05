@@ -58,8 +58,30 @@ public class Book implements Serializable {
     @NotNull
     private Set<Category> categories = new HashSet<>();
 
+    public List<CartDetail> getCartDetails() {
+        return cartDetails;
+    }
+
+    public void setCartDetails(List<CartDetail> cartDetails) {
+        this.cartDetails = cartDetails;
+    }
+
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    List<CartDetail> cartDetails = new ArrayList<>();
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    List<OrderDetail> orderDetails = new ArrayList<>();
 
     public List<Review> getReviews() {
         return reviews;

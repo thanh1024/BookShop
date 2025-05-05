@@ -39,6 +39,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
           rel="stylesheet">
+    <link rel="stylesheet" href="/css/search.css">
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" />

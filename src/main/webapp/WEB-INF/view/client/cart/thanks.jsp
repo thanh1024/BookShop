@@ -35,6 +35,7 @@
 
     <!-- Template Stylesheet -->
     <link href="/client/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/search.css">
 </head>
 
 <!-- Spinner Start -->

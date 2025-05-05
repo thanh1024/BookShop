@@ -3,10 +3,12 @@ package com.example.bookshop.service;
 import com.example.bookshop.domain.*;
 import com.example.bookshop.domain.DTO.BookDTO;
 import com.example.bookshop.repository.*;
+import com.example.bookshop.service.specification.BookSpec;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -188,5 +190,9 @@ public class BookService {
 
     public Page<Book> getAllProducts(Pageable page) {
         return this.bookRepository.findAll(page);
+    }
+
+    public Page<Book> getAllProductsSpec(Pageable page, String name) {
+        return bookRepository.findAll(BookSpec.nameLike(name), page);
     }
 }

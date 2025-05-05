@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
     <meta name="author" content="Hỏi Dân IT" />
-    <title>Book - Hỏi Dân IT</title>
+    <title>Book</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -59,6 +59,9 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <c:if test="${totalPages == 0}">
+                                <div>Không tìm thấy sách</div>
+                            </c:if>
                             <c:forEach var="book" items="${books}">
                                 <tr>
                                     <td>${book.id}</td>
